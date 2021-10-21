@@ -1,6 +1,6 @@
 clear
 clc
-%读入undistorted图片
+%read undistorted pictures
 image = rgb2gray(imread('./data/images_undistorted/img_0001.jpg'));
 
 % world frame [m]
