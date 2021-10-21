@@ -39,8 +39,17 @@ imshow(image); hold on;
 plot(projected_pts(1,:), projected_pts(2,:), 'r.');
 hold off;
 
+% Undistort image with bilinear interpolation
+tic;
+img_undistorted = undistortImage(image,K,D,1);
+disp(['Undistortion with bilinear interpolation completed in ' num2str(toc)]);
 
+% Vectorized undistortion without bilinear interpolation
+tic;
+img_undistorted_vectorized = undistortImageVectorized(image,K,D);
+disp(['Vectorized undistortion completed in ' num2str(toc)]);
 
+figure();
 
 
 
