@@ -1,7 +1,5 @@
 clear
 clc
-%read undistorted pictures
-image = rgb2gray(imread('./data/images_undistorted/img_0001.jpg'));
 
 % world frame [m]
 % x = 0:4:32;
@@ -18,11 +16,17 @@ p_W_corners = square_size * [X(:) Y(:)];
 p_W_corners = [p_W_corners zeros(num_corners,1)]';
 
 %
-pose = load('./data/poses.txt');
-K = load('./data/K.txt'); 
-D = load('./data/D.txt');
+pose = load('../data/poses.txt');
+K = load('../data/K.txt'); 
+D = load('../data/D.txt');
 
 image_index = 1;
+
+%read undistorted pictures
+% image = rgb2gray(imread(['../data/images_undistorted/',sprintf('img_%04d.jpg',image_index)]));
+
+%read the first distorted pictures
+image = rgb2gray(imread(['../data/images/',sprintf('img_%04d.jpg',image_index)]));
 
 % from world to camera coordinate frame
 T_C_W = poseVectorToTransformationMatrix(pose(1,:));
