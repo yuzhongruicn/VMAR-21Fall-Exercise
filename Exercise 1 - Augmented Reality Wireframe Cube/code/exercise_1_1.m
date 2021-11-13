@@ -50,7 +50,7 @@ tic;
 img_undistorted_vectorized = undistortImageVectorized(image,K,D);
 disp(['Vectorized undistortion completed in ' num2str(toc)]);
 
-figure();
+figure(2)
 subplot(1, 2, 1);
 imshow(img_undistorted);
 title('With bilinear interpolation');
@@ -71,11 +71,12 @@ p_C_cube = p_C_cube(1:3,:);
 
 cube_pts = projectPoints(p_C_cube, K, zeros(4,1));
 
-figure();
-imshow(img_undistorted); hold on;
+figure(3)
+imshow(img_undistorted);hold on;
 
 lw = 3;
 
+figure(3)
 % base layer of the cube
 line([cube_pts(1,1), cube_pts(1,2)],[cube_pts(2,1), cube_pts(2,2)], 'color', 'red', 'linewidth', lw);
 line([cube_pts(1,1), cube_pts(1,3)],[cube_pts(2,1), cube_pts(2,3)], 'color', 'red', 'linewidth', lw);

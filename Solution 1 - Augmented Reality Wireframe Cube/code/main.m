@@ -42,7 +42,7 @@ p_C_corners = p_C_corners(1:3,:);
 
 projected_pts = projectPoints(p_C_corners, K, D);
 
-figure();
+figure(1);
 imshow(img); hold on;
 plot(projected_pts(1,:), projected_pts(2,:), 'r.');
 hold off;
@@ -58,14 +58,13 @@ tic;
 img_undistorted_vectorized = undistortImageVectorized(img,K,D);
 disp(['Vectorized undistortion completed in ' num2str(toc)]);
 
-figure();hold on;
+figure(2);
 subplot(1, 2, 1);
 imshow(img_undistorted);
 title('With bilinear interpolation');
 subplot(1, 2, 2);
 imshow(img_undistorted_vectorized);
 title('Without bilinear interpolation');
-hold off;
 
 % Draw a cube on the undistorted image
 offset_x = 0.04 * 3; offset_y = 0.04;
@@ -78,7 +77,7 @@ p_C_cube = p_C_cube(1:3,:);
 
 cube_pts = projectPoints(p_C_cube, K, zeros(4,1));
 
-figure();
+figure(3);
 imshow(img_undistorted); hold on;
 
 lw = 3;
@@ -103,4 +102,3 @@ line([cube_pts(1,4), cube_pts(1,4+4)],[cube_pts(2,4), cube_pts(2,4+4)], 'color',
 
 hold off;
 set(gca,'position',[0 0 1 1],'units','normalized')
-
