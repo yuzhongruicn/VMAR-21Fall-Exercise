@@ -42,11 +42,8 @@ p_C_corners = p_C_corners(1:3,:);
 
 projected_pts = projectPoints(p_C_corners, K, D);
 
-<<<<<<< HEAD
-figure()
-=======
+
 figure(1);
->>>>>>> 9a0e7f7dfc0a9f67eaa0598424f84bcc7dc6c465
 imshow(img); hold on;
 plot(projected_pts(1,:), projected_pts(2,:), 'r.');
 hold off;
