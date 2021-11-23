@@ -1,7 +1,7 @@
 function m_tilde = estimatePoseDLT(p,P,K)
-% p: [nx2];
-% P: [nx3];
-% K: [3x3];
+% p: [nx2] 2D points;
+% P: [nx3] 3D points in the world frame;
+% K: [3x3] camera matrix;
 
 %normalization
 p_normalized = (K \ [p ones(length(p),1)]')'; %反斜杠:矩阵左除， 单引号:转置;
@@ -20,7 +20,7 @@ for i = 1:num_corners
     
     Q(2*i, 5:7) = P(i,:);
     Q(2*i, 8) = 1;
-    Q(2*i, 9:12) = -u*[P(i,:) 1];
+    Q(2*i, 9:12) = -v*[P(i,:) 1];
 end
 
 % solving Q.M = 0 using SVD

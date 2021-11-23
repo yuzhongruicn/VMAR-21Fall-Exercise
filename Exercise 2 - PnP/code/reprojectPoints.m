@@ -1,7 +1,13 @@
-function [outputArg1,outputArg2] = reprojectPoints(inputArg1,inputArg2)
-%REPROJECTPOINTS Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function p_reproj = reprojectPoints(P,M,K)
+
+%P: [nx3] 3D points in the world frame;
+%m: [3x4] projection matrix
+%K: [3x3] camera matrix
+
+p_homo = (K*M*[P'; ones(1,length(P))])'; 
+p_homo(:,1) = p_homo(:,1) ./ p_homo(:,3);
+p_homo(:,2) = p_homo(:,2) ./ p_homo(:,3);
+
+p_reproj = p_homo(:, 1:2);
 end
 

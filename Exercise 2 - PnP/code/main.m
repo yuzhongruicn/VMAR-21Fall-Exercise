@@ -24,8 +24,31 @@ m_tilde_dlt = estimatePoseDLT(pts2d, p_W_corners, K);
 p_reproj = reprojectPoints(p_W_corners, m_tilde_dlt, K);
 
 figure(1);
-
+imshow(undimg); hold on;
+plot(pts2d(:,1), pts2d(:,2), 'o'); hold on;
+plot(p_reproj(:,1), p_reproj(:,2), '+');
+legend('Original points','Reprojected points');
+hold off;
 
 %% Produce a 3D plot containing the corner positions and a visualization of the camera axis
 figure(2);
+
+scatter3(p_W_corners(:,1), p_W_corners(:,2), p_W_corners(:,3)); hold on;
+axis equal;
+
+camup([0 1 0]);
+view([0 0 -1]);
+
+R_C_W = m_tilde_dlt(1:3,1:3);
+t_C_W = m_tilde_dlt(1:3,4);
+rotMat = R_C_W';
+pos = -R_C_W' * t_C_W;
+
+scaleFactorArrow = .05;
+
+axisX = quiver3(pos(1),pos(2),pos(3), rotMat(1,1),rotMat(2,1),rotMat(3,1), 'r', 'ShowArrowHead', 'on', 'AutoScale', 'on', 'AutoScaleFactor', scaleFactorArrow);
+axisY = quiver3(pos(1),pos(2),pos(3), rotMat(1,2),rotMat(2,2),rotMat(3,2), 'g', 'ShowArrowHead', 'on', 'AutoScale', 'on', 'AutoScaleFactor', scaleFactorArrow);
+axisZ = quiver3(pos(1),pos(2),pos(3), rotMat(1,3),rotMat(2,3),rotMat(3,3), 'b', 'ShowArrowHead', 'on', 'AutoScale', 'on', 'AutoScaleFactor', scaleFactorArrow);
+
+
 
