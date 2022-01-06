@@ -1,3 +1,6 @@
+clc;
+clear;
+
 %% Part 1: Warping images
 I_R = imread('../data/000000.png');
 figure(1)
